@@ -1,0 +1,66 @@
+/**
+ * Fix issue where WP admin bar doesn't stay fixed under 600px of width
+ */
+
+#wpadminbar {
+	@extend .fixed-top;
+}
+
+/**
+ * Main wrapper always fills screen
+ */
+
+@include main_wrapper {
+	min-height: calc(100vh - (#{$header_height} + #{$footer_height}));
+}
+
+.admin-bar {
+	@include main_wrapper {
+		min-height: calc(100vh - (#{$header_height} + #{$footer_height} + #{$wpadminbar_height_mobile}));
+	}
+
+	@include wpadmin_bp {
+		@include main_wrapper{
+			min-height: calc(100vh - (#{$header_height} + #{$footer_height} + #{$wpadminbar_height_desktop}));
+		}
+	}
+}
+
+/**
+ * Separator for content on index and individual pages, post headers, left and
+ * right sidebars, and comment sections
+ */
+
+header,
+article {
+	&::after {
+		@include border_separator;
+	}
+}
+
+#left-sidebar,
+#right-sidebar {
+	aside:not(:last-child)::after {
+		@include border_separator;
+	}
+}
+
+#comments::before {
+	@include border_separator;
+}
+
+/**
+ * Fix iframe overreaching its container issue
+ */
+
+.content-area iframe {
+	max-width: 100%;
+}
+
+/**
+ * Footer
+ */
+
+#wrapper-footer {
+	background-color: $primary;
+}

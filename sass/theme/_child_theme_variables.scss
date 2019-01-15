@@ -1,0 +1,33 @@
+$header_height: 56px;
+$footer_height: calc(24px + 30px + 30px);
+
+$wpadminbar_height_mobile: 46px;
+$wpadminbar_height_desktop: 32px;
+$wpadminbar_breakpoint: 783px;
+
+@mixin wpadmin_bp {
+	@media (min-width: #{$wpadminbar_breakpoint}) {
+		@content;
+	}
+}
+
+// If more main page wrappers are discovered in main theme, add them here
+@mixin main_wrapper {
+	#page-wrapper,
+	#index-wrapper,
+	#single-wrapper,
+	#full-width-page-wrapper,
+	#author-wrapper,
+	#archive-wrapper,
+	#search-wrapper {
+		@content;
+	}
+}
+
+@mixin border_separator {
+	content: '';
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid black;
+	@extend .my-3;
+}
